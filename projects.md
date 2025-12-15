@@ -19,10 +19,13 @@ permalink: /projects/
     {% for project in site.projects %}
       <a href="{{ project.url | relative_url }}" class="project-card" style="text-decoration: none;">
         <div class="card-visual">
+           {% if project.teaser %}
+           <img src="{{ project.teaser | relative_url }}" alt="{{ project.title }} Visual" style="width: 60%; height: 60%; object-fit: contain;">
+           {% else %}
            <div class="tech-circle">
-             <!-- Simple geometric icon -->
              <div style="width: 8px; height: 8px; background: var(--text-color); border-radius: 50%; opacity: 0.5;"></div>
            </div>
+           {% endif %}
         </div>
         <div class="card-content">
           <h3 class="card-title">{{ project.title }}</h3>

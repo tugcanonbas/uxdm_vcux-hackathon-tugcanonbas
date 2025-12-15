@@ -43,9 +43,12 @@
   margin-bottom: 1.5rem;
   position: relative;
   z-index: 1;
-  background: linear-gradient(to bottom, #fff, #aaa);
+  // Dynamic gradient text
+  background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 20px rgba(79, 70, 229, 0.3));
   
   @media (max-width: 768px) {
     font-size: 2.5rem;
