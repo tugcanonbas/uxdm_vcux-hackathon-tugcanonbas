@@ -11,6 +11,14 @@ author:
 markdown: kramdown
 theme: null
 
+collections:
+  projects:
+    output: true
+    permalink: /projects/:slug/
+  publications:
+    output: true
+    permalink: /publications/:slug/
+
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
@@ -30,4 +38,4 @@ defaults:
   - scope:
       path: ""
     values:
-      image: /assets/images/tugcanonbas.png # Default social image
+      image: /assets/images/tugcanonbas.jpg # Default social image

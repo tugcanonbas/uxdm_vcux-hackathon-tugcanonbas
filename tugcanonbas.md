@@ -5,7 +5,7 @@
 - **Role:** Multidisiplinary Designer & Software Developer
 - **Location:** Ingolstadt, Germany 🇩🇪
 - **Bio:** I'm a multidisciplinary designer and software developer. Pursuing a master's degree in User Experience Design at Technische Hochschule Ingolstadt. Over the years, I've been working on various projects, from mobile applications to websites, from branding to digital products. I'm passionate about creating meaningful and delightful experiences. I fuse creativity and technology to design experiences that I can code.
-- **Profile Image:** tugcanonbas.png
+- **Profile Image:** tugcanonbas.jpg
 - **Languages:**
   - Turkish (Native)
   - English (Advanced - IELTS 7.0)

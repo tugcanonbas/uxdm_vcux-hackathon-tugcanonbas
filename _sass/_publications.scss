@@ -1,0 +1,196 @@
+
+// Publications Hero & Layout
+.pubs-hero {
+  position: relative;
+  min-height: 400px;
+  @include flex-center;
+  margin-bottom: 4rem;
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  perspective: 1000px;
+}
+
+#pubs-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+}
+
+.pubs-header-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  pointer-events: none;
+  mix-blend-mode: overlay; // Cool blend effect with the particles
+  
+  h1 {
+    font-size: 4rem;
+    font-weight: 800;
+    letter-spacing: -2px;
+    background: linear-gradient(to right, #fff, #999);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  }
+}
+
+[data-theme="light"] .pubs-header-content {
+  mix-blend-mode: normal;
+  h1 {
+    background: linear-gradient(to right, #111, #555);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+// Publication Stack Layout
+.pub-stack-container {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  padding-bottom: 10rem;
+}
+
+.pub-card {
+  position: relative;
+  margin-bottom: 1.5rem;
+  padding: 2.5rem;
+  background: rgba(15, 15, 20, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-left: 2px solid; 
+  border-image-slice: 1;
+  border-image-source: var(--secondary-gradient);
+  border-radius: 0 16px 16px 0;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transform-origin: center left;
+  cursor: pointer;
+  overflow: hidden;
+  
+  // Hover & Active States
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateX(20px) scale(1.02);
+    box-shadow: -10px 0 30px rgba(6, 182, 212, 0.1);
+  }
+
+  &::before {
+    content: 'OPEN';
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%) translateX(20px);
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    opacity: 0;
+    transition: all 0.3s ease;
+    color: var(--text-color);
+  }
+  
+  &:hover::before {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+}
+
+[data-theme="light"] .pub-card {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.pub-year {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  position: absolute;
+  right: -1rem;
+  top: -1rem;
+  opacity: 0.05;
+  font-weight: 900;
+  z-index: 0;
+  pointer-events: none;
+  transition: transform 0.5s ease;
+}
+
+.pub-card:hover .pub-year {
+  transform: scale(1.2) rotate(-10deg);
+  opacity: 0.1;
+}
+
+.pub-content {
+  position: relative;
+  z-index: 1;
+}
+
+.pub-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+  width: 90%;
+  background: var(--text-color);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; // Solid text that might get gradient on hover
+}
+
+.pub-meta {
+  font-family: 'Space Mono', monospace; // Or body font if space mono not avail
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  
+  span.separator {
+    width: 4px;
+    height: 4px;
+    background: var(--text-muted);
+    border-radius: 50%;
+    opacity: 0.5;
+  }
+}
+
+.pub-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  opacity: 0.6;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  height: 0;
+  overflow: hidden;
+}
+
+.pub-card:hover .pub-actions {
+  opacity: 1;
+  transform: translateY(0);
+  height: auto;
+  overflow: visible;
+}
+
+.action-btn {
+  padding: 0.5rem 1.25rem;
+  border-radius: 2rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-color);
+  transition: all 0.2s;
+  
+  &:hover {
+    background: var(--text-color);
+    color: var(--bg-color);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+  }
+}

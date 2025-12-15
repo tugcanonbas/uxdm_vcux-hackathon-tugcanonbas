@@ -1,0 +1,111 @@
+---
+layout: default
+---
+
+<article class="pub-detail-page">
+    <div class="container">
+        <div class="pub-header animate-fade-in-up">
+            <a href="{{ '/publications/' | relative_url }}" class="back-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                Back to Publications
+            </a>
+
+            <div class="pub-meta-top">
+                <span class="pub-type badge">{{ page.type | capitalize }}</span>
+                <span class="pub-year">{{ page.year }}</span>
+            </div>
+
+            <h1 class="pub-title">{{ page.title }}</h1>
+
+            <div class="pub-authors">
+                {% assign authors = page.authors | split: ", " %}
+                {% for author in authors %}
+                {% if author contains "Önbaş" %}
+                <span class="author me">{{ author }}</span>
+                {% else %}
+                <span class="author">{{ author }}</span>
+                {% endif %}
+                {% endfor %}
+            </div>
+
+            <div class="pub-venue">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                </svg>
+                {{ page.conference }}
+            </div>
+        </div>
+
+        <!-- Visual Abstract / Content Grid -->
+        <div class="pub-grid animate-fade-in-up" style="animation-delay: 0.1s;">
+
+            <div class="pub-main glass-panel">
+                <h2>Abstract</h2>
+                <div class="abstract-text">
+                    {{ content }}
+                </div>
+
+                <div class="pub-actions">
+                    {% if page.url %}
+                    <a href="{{ page.url }}" target="_blank" class="button primary">
+                        View Paper <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                            <polyline points="15 3 21 3 21 9"></polyline>
+                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                    </a>
+                    {% endif %}
+
+                    <button class="button secondary"
+                        onclick="navigator.clipboard.writeText('{{ page.bibtex }}'); alert('Citation copied!');">
+                        Copy Citation
+                    </button>
+                </div>
+            </div>
+
+            <!-- Stats / Details Sidebar -->
+            <aside class="pub-sidebar">
+                <div class="stat-card glass-panel">
+                    <span class="stat-label">DOI</span>
+                    <a href="https://doi.org/{{ page.doi }}" class="stat-value link">{{ page.doi }}</a>
+                </div>
+
+                <div class="stat-card glass-panel">
+                    <span class="stat-label">Pages</span>
+                    <span class="stat-value">{{ page.pages }}</span>
+                </div>
+
+                {% if page.impact %}
+                <div class="stat-card glass-panel highlight">
+                    <span class="stat-value big">{{ page.impact }}</span>
+                    <span class="stat-label">Impact Factor</span>
+                </div>
+                {% endif %}
+            </aside>
+
+        </div>
+    </div>
+</article>
+
+<style>
+    .pub-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    @media (max-width: 768px) {
+        .pub-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

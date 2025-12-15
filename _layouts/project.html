@@ -1,0 +1,124 @@
+---
+layout: default
+---
+
+<article class="project-detail-page">
+    <!-- Dynamic Background -->
+    <div class="project-hero-bg">
+        <div class="glow-orb"></div>
+    </div>
+
+    <div class="container">
+        <header class="project-header animate-fade-in-up">
+            <a href="{{ '/projects/' | relative_url }}" class="back-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                Back to Projects
+            </a>
+
+            <h1 class="project-title">{{ page.title }}</h1>
+            <div class="project-subtitle">{{ page.description }}</div>
+
+            <div class="project-tags">
+                {% for tag in page.tags %}
+                <span class="p-tag">{{ tag }}</span>
+                {% endfor %}
+            </div>
+        </header>
+
+        <div class="project-content-grid">
+            <!-- Sticky Sidebar -->
+            <aside class="project-sidebar animate-fade-in-up" style="animation-delay: 0.1s;">
+                <div class="sidebar-card glass-panel">
+                    <h3>Project Info</h3>
+
+                    <div class="info-item">
+                        <span class="label">Role</span>
+                        <span class="value">{{ page.role | default: "Lead Developer & Designer" }}</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="label">Timeline</span>
+                        <span class="value">{{ page.timeline | default: "2024" }}</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="label">Tech Stack</span>
+                        <div class="stack-list">
+                            {% for tag in page.tags limit:4 %}
+                            <span class="stack-item">{{ tag }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    {% if page.link %}
+                    <a href="{{ page.link }}" target="_blank" class="button primary full-width">
+                        Visit Live Site <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                            <polyline points="15 3 21 3 21 9"></polyline>
+                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                    </a>
+                    {% endif %}
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <div class="project-body animate-fade-in-up" style="animation-delay: 0.2s;">
+                <!-- Generated Content Section if body is short/empty (for demo) -->
+                <div class="content-block glass-panel">
+                    <h2>The Overview</h2>
+                    <p>{{ content }}</p>
+
+                    {% if page.generated_challenge %}
+                    <h3>The Challenge</h3>
+                    <p>{{ page.generated_challenge }}</p>
+                    {% endif %}
+
+                    {% if page.generated_solution %}
+                    <h3>The Solution</h3>
+                    <p>{{ page.generated_solution }}</p>
+                    {% endif %}
+                </div>
+
+                <div class="content-block glass-panel">
+                    <h2>Key Features</h2>
+                    <ul class="feature-list">
+                        {% for feature in page.features %}
+                        <li>
+                            <span class="check-icon">✓</span>
+                            {{ feature }}
+                        </li>
+                        {% else %}
+                        <!-- Default features if none provided -->
+                        <li><span class="check-icon">✓</span> User-Centered Design optimized for accessibility.</li>
+                        <li><span class="check-icon">✓</span> High-performance architecture.</li>
+                        <li><span class="check-icon">✓</span> Seamless cross-platform experience.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+
+<style>
+    /* Scoped styles just for structure, visual style in SCSS */
+    .project-content-grid {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        gap: 3rem;
+        margin-top: 3rem;
+    }
+
+    @media (max-width: 900px) {
+        .project-content-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

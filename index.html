@@ -7,6 +7,10 @@ title: Home
     <canvas id="hero-canvas"
         style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"></canvas>
     <div class="animate-fade-in-up" style="position: relative; z-index: 1;">
+        <a href="mailto:{{ site.data.personal.email }}?subject=Project%20Inquiry" class="availability-badge">
+            <span class="status-dot"></span>
+            {{ site.data.personal.availability.status }}
+        </a>
         <h1>{{ site.data.personal.name }}</h1>
         <p class="subtitle">{{ site.data.personal.role }}</p>
         <div style="display: flex; gap: 1rem; justify-content: center;">
@@ -19,10 +23,19 @@ title: Home
 <section class="container" style="padding-bottom: var(--spacing-xl);">
     <h2 class="section-title">About Me</h2>
     <div class="glass-panel"
-        style="background: var(--glass-bg); padding: var(--spacing-md); border-radius: 16px; backdrop-filter: blur(10px); border: 1px solid var(--glass-border);">
-        <p style="font-size: 1.1rem; color: var(--text-muted); max-width: 800px; margin: 0 auto; text-align: center;">
-            {{ site.data.personal.bio }}
-        </p>
+        style="background: var(--glass-bg); padding: var(--spacing-md); border-radius: 16px; backdrop-filter: blur(10px); border: 1px solid var(--glass-border); max-width: 900px; margin: 0 auto;">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 2rem;">
+            <div class="profile-image-wrapper" style="position: relative;">
+                <div
+                    style="position: absolute; inset: -4px; background: var(--primary-gradient); border-radius: 50%; z-index: 0; opacity: 0.5; filter: blur(8px);">
+                </div>
+                <img src="{{ '/assets/images/tugcanonbas.jpg' | relative_url }}" alt="{{ site.data.personal.name }}"
+                    style="width: 160px; height: 160px; object-fit: cover; border-radius: 50%; position: relative; z-index: 1; border: 4px solid var(--bg-color); background: white;">
+            </div>
+            <p style="font-size: 1.1rem; color: var(--text-muted); text-align: center; line-height: 1.6; margin: 0;">
+                {{ site.data.personal.bio }}
+            </p>
+        </div>
     </div>
 </section>
 

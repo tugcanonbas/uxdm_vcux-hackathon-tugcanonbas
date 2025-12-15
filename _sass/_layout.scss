@@ -1,3 +1,7 @@
+.container {
+  @include container;
+}
+
 header.site-header {
   @include glass;
   position: fixed;
@@ -217,4 +221,52 @@ main {
       margin-bottom: var(--spacing-xs);
     }
   }
+}
+
+/* Availability Badge */
+.availability-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--glass-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 99px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-color);
+  margin-bottom: var(--spacing-md);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  text-decoration: none;
+
+  &:hover {
+    background: var(--glass-highlight);
+    border-color: var(--text-color);
+    transform: translateY(-2px);
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #10B981;
+    border-radius: 50%;
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      background-color: #10B981;
+      border-radius: 50%;
+      opacity: 0.4;
+      animation: pulse 2s infinite;
+    }
+  }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.4; }
+  50% { transform: scale(1.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 0.4; }
 }
