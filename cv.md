@@ -38,6 +38,14 @@ title: CV
       const audioPlayer = document.getElementById('cv-audio-player');
 
       listenBtn.addEventListener('click', () => {
+        // Force reload audio source with timestamp to prevent caching
+        const source = audioPlayer.querySelector('source');
+        if (source) {
+            const baseUrl = source.src.split('?')[0];
+            source.src = `${baseUrl}?v=${Date.now()}`;
+            audioPlayer.load(); // Reload the audio element
+        }
+        
         listenBtn.style.display = 'none';
         audioContainer.style.display = 'flex';
         audioPlayer.play();
