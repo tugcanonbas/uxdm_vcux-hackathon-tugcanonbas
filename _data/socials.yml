@@ -1,0 +1,18 @@
+- platform: Website
+  url: https://tugcanonbas.com
+  username: tugcanonbas.com
+- platform: GitHub
+  url: https://github.com/tugcanonbas
+  username: tugcanonbas
+- platform: LinkedIn
+  url: https://www.linkedin.com/in/tugcanonbas/
+  username: tugcanonbas
+- platform: Twitter/X
+  url: https://x.com/tgcn_dev
+  username: tgcn_dev
+- platform: Behance
+  url: https://www.behance.net/tugcanonbas
+  username: tugcanonbas
+- platform: Apple Developer
+  url: https://apps.apple.com/developer/tugcan-onbas/id1606259525
+  username: tugcan-onbas

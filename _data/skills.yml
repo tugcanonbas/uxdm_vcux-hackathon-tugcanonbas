@@ -1,0 +1,16 @@
+- category: Design
+  items: [UI/UX Design, Visual Communication, Branding, Interaction Design, Wireframing, Prototyping, Data Visualization, Photography, Video Production]
+- category: Tools
+  items: [Figma, Sketch, Adobe Creative Cloud (XD, Photoshop, Illustrator, InDesign, After Effects, Premiere)]
+- category: Mobile Development
+  items: [iOS Development (Swift, SwiftUI), Flutter, Dart, Kotlin]
+- category: Web Development (Frontend)
+  items: [Svelte, SvelteKit, React, React Native, TypeScript, JavaScript, HTML, CSS/SCSS, Tailwind CSS, WordPress]
+- category: Backend Development
+  items: [Node.js, Vapor (Swift), Python, MySQL, PostgreSQL, MongoDB, Redis]
+- category: Simulation & Research Engineering
+  items: [CARLA Simulator, Python, LLMs (Ollama), WebSockets, Physiological Sensors (Empatica, Shimmer), Local Network/UDP Communication]
+- category: DevOps & Infrastructure
+  items: [Docker, NGINX, Linux, CI/CD (GitHub Actions)]
+- category: Other
+  items: [Git, GitHub, GitLab, Agile/Scrum, Jira]

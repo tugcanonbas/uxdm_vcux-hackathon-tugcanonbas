@@ -1,0 +1,42 @@
+- name: Apprid
+  description: Developed RESTful APIs with Swift Vapor and PostgreSQL, integrated Paddle payment, and built a responsive SvelteKit frontend for a cross-functional app. (Web App)
+  tags: [Web App, Swift Vapor, SvelteKit]
+- name: AuthoConnectable
+  description: Open-sourced project template for Swift Vapor, simplifying backend setup by integrating Authomatek and ConnectableKit packages. (Swift Package)
+  tags: [Swift Package, Open Source]
+- name: SvelteKit Trivia App
+  description: A fun, interactive game built with SvelteKit testing knowledge with a sleek, responsive design. (Web App)
+  tags: [Web App, SvelteKit]
+- name: Thothr
+  description: Your personal time capsule designed to make every moment count. (iOS / iPadOS App)
+  tags: [iOS, iPadOS]
+- name: Critique
+  description: AI Design Review assistant. (iOS / iPadOS App)
+  tags: [iOS, iPadOS, AI]
+- name: eightthings
+  description: Productivity app designed to prioritize core tasks. (iOS / iPadOS / MacOS / VisionOS App)
+  tags: [Productivity, iOS, MacOS, VisionOS]
+- name: ConnectableKit
+  description: Swift package for Vapor that simplifies response DTOs and JSON structures.
+  tags: [Swift Package]
+- name: Authomatek
+  description: Swift package for Vapor providing pre-configured authentication for relational databases.
+  tags: [Swift Package]
+- name: Camplore
+  description: Integrated University's Student Information and Learning Management System. (UI/UX Design)
+  tags: [UI/UX Design]
+- name: PrexiPay
+  description: App for splitting bills and managing group expenses. (UI/UX Design)
+  tags: [UI/UX Design]
+- name: tugcanonbas.com
+  description: Personal website blending code and creative expression. (Web Development)
+  tags: [Web Development]
+- name: tutkucevik.com
+  description: Portfolio website for visual communication designer Tutku Çevik. (Web Development)
+  tags: [Web Development]
+- name: ARCitron
+  description: Game Design & Development.
+  tags: [Game Design]
+- name: Dijital Darağaç
+  description: Outdoor Augmented Reality for Alternative Art Spaces.
+  tags: [AR, Research]

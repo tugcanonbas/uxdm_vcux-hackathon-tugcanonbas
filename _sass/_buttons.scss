@@ -1,0 +1,47 @@
+/* Button Styles using theme variables */
+.button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 99px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.button.primary {
+  background: var(--primary-gradient);
+  color: var(--btn-text);
+  box-shadow: 0 4px 15px var(--card-hover-shadow);
+  border: none;
+}
+
+.button.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px var(--card-hover-shadow);
+  opacity: 0.9;
+}
+
+.button.secondary {
+  background: transparent;
+  border: 1px solid var(--secondary-btn-border);
+  color: var(--text-color);
+}
+
+.button.secondary:hover {
+  background: var(--secondary-btn-hover);
+  border-color: var(--text-color);
+}
+
+.button-sm {
+  border: 1px solid var(--border-color);
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  color: var(--text-color);
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: var(--glass-highlight);
+    border-color: var(--text-color);
+  }
+}

@@ -1,0 +1,52 @@
+- role: Student Assistant
+  company: Human-Centered Intelligence Systems Lab, AImotion Bavaria, Technische Hochschule Ingolstadt
+  location: Ingolstadt, Germany
+  details:
+    - Designed and developed the lab's official website using SvelteKit, implementing a dynamic content management system powered by Markdown and FrontMatter for seamless team updates.
+    - "Currently engineering an enhanced simulation development platform tailored for User Experience Designers. Leveraging **CARLA Simulator, Python, Ollama (LLMs), WebSockets, and Physiological Sensors** to streamline the creation and execution of complex, real-time User Studies with local network communication."
+- role: Mobile Developer
+  company: fybu
+  location: İzmir, Türkiye
+  details:
+    - Mobile application development in the field of accounting systems using Flutter, Dart, Swift, and Kotlin.
+    - Worked on "digitastic scan & more".
+- role: Creative Director
+  company: Gökhan Talay Ayakkabı
+  location: İzmir, Türkiye
+  details:
+    - Managed e-commerce designs and product photography, collaborating with sales and marketing teams.
+- role: Visual Communication Designer
+  company: İzmir University of Economics
+  location: İzmir, Türkiye
+  details:
+    - Developed "Dijital Darağaç", an Outdoor Augmented Reality application for Alternative Art Spaces (Scientific Research Project).
+- role: Fashion Photographer
+  company: Hilal Karakaş
+  location: İzmir, Türkiye
+  details:
+    - Official photographer for a fashion-focused school project.
+- role: Freelance Photographer
+  company: Payidar Law Agency
+  location: Ankara, Türkiye
+  details:
+    - Captivating custom business photographs for the company's website.
+- role: Freelance Designer
+  company: Arfen Private School
+  location: Ankara, Türkiye
+  details:
+    - Designed the school's yearbook for the class of 2018.
+- role: Video Producer
+  company: Arfen Private School
+  location: Ankara, Türkiye
+  details:
+    - Produced and edited advertisement/promotion videos.
+- role: Graphic Designer
+  company: Medya Ankara Çözüm Danışmanlık
+  location: Ankara, Türkiye
+  details:
+    - Website content design and WordPress management.
+- role: Designer
+  company: Naturel Su Arıtma
+  location: Ankara, Türkiye
+  details:
+    - Web content creation.
