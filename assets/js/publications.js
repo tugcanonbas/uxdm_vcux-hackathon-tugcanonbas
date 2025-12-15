@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     initPubsHero();
+    initPubCards();
 });
 
 function initPubsHero() {
@@ -101,4 +102,42 @@ function initPubsHero() {
     window.addEventListener('resize', resize);
     resize();
     animate();
+}
+
+function initPubCards() {
+    const cards = document.querySelectorAll('.pub-card');
+    
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            // Subtle tilt
+            const rotateX = ((y - centerY) / centerY) * -1; // Invert for natural feel
+            const rotateY = ((x - centerX) / centerX);
+            
+            // Max rotation degrees
+            const maxRot = 3;
+            
+            card.style.transform = `
+                perspective(1000px)
+                rotateX(${rotateX * maxRot}deg)
+                rotateY(${rotateY * maxRot}deg)
+                scale(1.02)
+            `;
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = `
+                perspective(1000px)
+                rotateX(0deg)
+                rotateY(0deg)
+                scale(1)
+            `;
+        });
+    });
 }

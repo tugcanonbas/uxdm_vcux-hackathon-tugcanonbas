@@ -21,9 +21,9 @@
                     <h1 class="detail-title">{{ page.title }}</h1>
                     <p class="detail-subtitle">{{ page.description }}</p>
 
-                    <div style="margin-top: 2rem;">
+                    <div style="margin-top: 2rem; position: relative; z-index: 2;">
                         {% if page.download_link %}
-                        <a href="{{ page.download_link }}" class="button primary">
+                        <a href="{{ page.download_link | relative_url }}" class="button primary" download>
                             Download Report PDF
                         </a>
                         {% endif %}

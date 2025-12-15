@@ -26,7 +26,7 @@
   z-index: 2;
   text-align: center;
   pointer-events: none;
-  mix-blend-mode: overlay; // Cool blend effect with the particles
+  mix-blend-mode: overlay;
   
   h1 {
     font-size: 4rem;
@@ -54,6 +54,7 @@
   margin: 0 auto;
   position: relative;
   padding-bottom: 10rem;
+  perspective: 1000px; // For 3D tilt
 }
 
 .pub-card {
@@ -68,64 +69,88 @@
   border-radius: 0 16px 16px 0;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-  transform-origin: center left;
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease; // Fast for tilt
+  transform-origin: center center;
   cursor: pointer;
   overflow: hidden;
+  transform-style: preserve-3d;
+  
+  // Custom texture/grid
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 20px 20px;
+    opacity: 0.5;
+    z-index: 0;
+    pointer-events: none;
+  }
   
   // Hover & Active States
   &:hover {
     background: rgba(255, 255, 255, 0.05);
-    transform: translateX(20px) scale(1.02);
-    box-shadow: -10px 0 30px rgba(6, 182, 212, 0.1);
+    // transform handled by JS tilt
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    z-index: 10;
+    
+    // Scan line animation trigger
+    .scan-line {
+      top: 100%;
+    }
   }
+}
 
-  &::before {
-    content: 'OPEN';
-    position: absolute;
-    right: 2rem;
-    top: 50%;
-    transform: translateY(-50%) translateX(20px);
-    font-size: 0.7rem;
-    letter-spacing: 2px;
-    opacity: 0;
-    transition: all 0.3s ease;
-    color: var(--text-color);
-  }
-  
-  &:hover::before {
-    opacity: 1;
-    transform: translateY(-50%) translateX(0);
-  }
+.scan-line {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background: linear-gradient(to bottom, transparent, rgba(6, 182, 212, 0.2), transparent);
+  z-index: 2;
+  pointer-events: none;
+  transition: top 1s linear; // Scan effect on hover
 }
 
 [data-theme="light"] .pub-card {
     background: rgba(255, 255, 255, 0.8);
     border-color: rgba(0,0,0,0.1);
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    
+    &::after {
+      background-image: radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px);
+    }
+    
+    .scan-line {
+       background: linear-gradient(to bottom, transparent, rgba(79, 70, 229, 0.1), transparent);
+    }
 }
 
 .pub-year {
   font-family: var(--font-heading);
-  font-size: 3rem;
+  font-size: 4rem;
   position: absolute;
-  right: -1rem;
-  top: -1rem;
-  opacity: 0.05;
+  right: 1rem;
+  top: 0rem;
+  opacity: 0.03;
   font-weight: 900;
   z-index: 0;
   pointer-events: none;
   transition: transform 0.5s ease;
+  transform: translateZ(-20px); // Push back in 3D
 }
 
 .pub-card:hover .pub-year {
-  transform: scale(1.2) rotate(-10deg);
+  transform: translateZ(20px) scale(1.1); // Pop forward
   opacity: 0.1;
+  color: var(--primary-color);
 }
 
 .pub-content {
   position: relative;
   z-index: 1;
+  transform: translateZ(20px); // Content floats above card
 }
 
 .pub-title {
@@ -136,11 +161,11 @@
   width: 90%;
   background: var(--text-color);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent; // Solid text that might get gradient on hover
+  -webkit-text-fill-color: transparent; 
 }
 
 .pub-meta {
-  font-family: 'Space Mono', monospace; // Or body font if space mono not avail
+  font-family: 'Space Mono', monospace; 
   font-size: 0.85rem;
   color: var(--text-muted);
   margin-bottom: 1.5rem;
@@ -162,18 +187,13 @@
   display: flex;
   gap: 1rem;
   margin-top: 1.5rem;
-  opacity: 0.6;
-  transform: translateY(10px);
+  // Make visible by default but low key, highlight on hover
+  opacity: 0.7;
   transition: all 0.3s ease;
-  height: 0;
-  overflow: hidden;
 }
 
 .pub-card:hover .pub-actions {
   opacity: 1;
-  transform: translateY(0);
-  height: auto;
-  overflow: visible;
 }
 
 .action-btn {
