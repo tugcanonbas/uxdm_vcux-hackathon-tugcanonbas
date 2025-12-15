@@ -118,7 +118,6 @@ title: CV
             <h4>{{ skill_group.category }}</h4>
             <div class="status-indicator"></div>
 
-<script src="{{ '/assets/js/cv.js' | relative_url }}"></script>
           </div>
           <div class="skill-tags">
             {% for skill in skill_group.items %}
@@ -130,3 +129,5 @@ title: CV
     </div>
   </section>
 </div>
+
+<script src="{{ '/assets/js/cv.js' | relative_url }}"></script>

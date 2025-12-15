@@ -16,8 +16,8 @@ permalink: /projects/
   </div>
   
   <div class="project-grid">
-    {% for project in site.data.projects %}
-      <div class="project-card">
+    {% for project in site.projects %}
+      <a href="{{ project.url | relative_url }}" class="project-card" style="text-decoration: none;">
         <div class="card-visual">
            <div class="tech-circle">
              <!-- Simple geometric icon -->
@@ -25,7 +25,7 @@ permalink: /projects/
            </div>
         </div>
         <div class="card-content">
-          <h3 class="card-title">{{ project.name }}</h3>
+          <h3 class="card-title">{{ project.title }}</h3>
           <p class="card-desc">{{ project.description }}</p>
           <div class="card-tags">
             {% for tag in project.tags %}
@@ -33,7 +33,7 @@ permalink: /projects/
             {% endfor %}
           </div>
         </div>
-      </div>
+      </a>
     {% endfor %}
   </div>
 </div>

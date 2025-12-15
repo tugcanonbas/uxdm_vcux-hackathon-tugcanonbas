@@ -188,6 +188,20 @@
   &:last-child {
     margin-bottom: 0;
   }
+  
+  // Connection line (Moved to item to avoid clipping in content)
+  &::before {
+    content: '';
+    position: absolute;
+    left: 20px; // Right edge of node
+    top: calc(1.5rem + 10px); // Center of node (top 1.5rem + half height 10px)
+    width: 0;
+    height: 1px;
+    background: #4F46E5;
+    opacity: 0.5;
+    transition: width 0.3s ease;
+    z-index: 2;
+  }
 }
 
 .cv-timeline-node {
@@ -215,7 +229,8 @@
 
 // When active/focused (closest to center) or hovered
 .cv-timeline-item.focused .cv-timeline-node,
-.cv-timeline-item:hover .cv-timeline-node {
+.cv-timeline-item:hover .cv-timeline-node,
+.cv-timeline-item.active-card .cv-timeline-node {
   border-color: #4F46E5;
   box-shadow: 0 0 0 4px var(--bg-color), 0 0 20px rgba(79, 70, 229, 0.6);
   transform: scale(1.2);
@@ -234,19 +249,34 @@
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   transform-style: preserve-3d; // For tilt
+  overflow: hidden; // For sheen
+  cursor: pointer; // Indicate clickable
   
-  // Connection line
-  &::before {
+  // Connection line - REMOVED from here to allow overflow: hidden
+
+
+  // Glossy Sheen Effect
+  &::after {
     content: '';
     position: absolute;
-    left: 0;
-    top: 1.5rem;
-    width: 0;
-    height: 1px;
-    background: #4F46E5;
-    opacity: 0.5;
-    transition: width 0.3s ease;
-    transform: translateX(-100%);
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(255, 255, 255, 0.1) 50%,
+      transparent
+    );
+    transform: skewX(-25deg);
+    transition: left 0.75s;
+    z-index: 1;
+    pointer-events: none;
+  }
+  
+  &:hover::after {
+    left: 200%;
   }
 }
 
@@ -254,19 +284,51 @@
 .cv-timeline-item:hover .cv-timeline-content {
   border-color: rgba(255,255,255,0.2);
   // transform and opacity handled by JS vars or tilt, but allow override for hover
-    &::before {
-    width: 2rem; // Connect to node
-    left: -2rem; // Shift back
-    transform: translateX(0);
-  }
+}
+
+// Hover Connection Line (Targeting item::before)
+.cv-timeline-item:hover::before,
+.cv-timeline-item.focused::before {
+  width: calc(2rem - 20px); // Connect node to content
 }
 
 // Ensure hovered item overrides the focus-blur if user specifically wants to see it
+// Hover overrides
 .cv-timeline-item:hover .cv-timeline-content {
   opacity: 1 !important;
   filter: blur(0px) !important;
-  // Scale handled by tilt or hover
   box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  z-index: 10;
+}
+
+// Active Card Mode (Clicked)
+.cv-timeline-item.active-card {
+  z-index: 20; // Highest
+  
+  .cv-timeline-content {
+    opacity: 1 !important;
+    filter: blur(0) !important;
+    transform: scale(1.05) !important; // Override tilt
+    box-shadow: 0 0 50px rgba(79, 70, 229, 0.2), 0 0 0 1px rgba(79, 70, 229, 0.5);
+    background: var(--glass-bg); // Ensure opacity
+    z-index: 20;
+  }
+  
+  // Active Connection Line
+  &::before {
+    width: calc(2rem - 20px);
+    background: #4F46E5;
+    box-shadow: 0 0 10px #4F46E5;
+    opacity: 1;
+  }
+}
+
+// When ANY card is active, dim the OTHERS
+body.has-active-card .cv-timeline-item:not(.active-card) {
+  opacity: 0.2;
+  filter: blur(4px);
+  pointer-events: none; // Prevent hover interference
+  transition: all 0.5s ease;
 }
 
 .cv-card-header {
@@ -311,10 +373,18 @@
   font-size: 0.95rem;
   color: var(--text-muted);
   
+  // Container hover: dim all items slightly
+  &:hover li {
+    opacity: 0.5;
+    filter: blur(0.5px);
+  }
+  
   li {
     margin-bottom: 0.5rem;
     position: relative;
-    padding-left: 1.25rem;
+    padding-left: 1.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer; // Indicate interactivity
     
     &::before {
       content: '▹';
@@ -322,6 +392,27 @@
       left: 0;
       color: var(--primary-color, #4F46E5);
       top: 0;
+      transition: all 0.3s ease;
+    }
+
+    // Specific item hover: restore opacity, glow, move
+    &:hover {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateX(5px);
+      color: var(--text-color);
+      
+      &::before {
+        content: '→';
+        color: #fff;
+        transform: scale(1.2);
+        text-shadow: 0 0 10px var(--primary-color);
+      }
+    }
+    
+    // Active/Clicked state for list item
+    &:active {
+      transform: translateX(2px) scale(0.98);
     }
   }
 }
@@ -358,14 +449,17 @@
     background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.1) 10%, rgba(0,0,0,0.1) 90%, transparent);
   }
   
+  .cv-timeline-item::before {
+    background: rgba(0,0,0,0.1);
+  }
+  
   .cv-timeline-content {
     background: #fff;
     border-color: rgba(0,0,0,0.1);
     box-shadow: 0 2px 6px rgba(0,0,0,0.05); 
     
-    &::before {
-      background: rgba(0,0,0,0.1);
-    }
+    // moved to item::before
+
   }
   
   .cv-timeline-item:hover .cv-timeline-content {

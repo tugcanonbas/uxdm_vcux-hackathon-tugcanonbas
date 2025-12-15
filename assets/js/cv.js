@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     initTimeline();
     initCVTilt();
+    // Initialize click interactions
+    initCardClick();
 });
 
 function initTimeline() {
@@ -82,9 +84,17 @@ function initTimeline() {
 
             // Apply interactive reading styles
             // We use CSS variables to performant updates
-            item.style.setProperty('--focus-opacity', opacity);
-            item.style.setProperty('--focus-scale', scale);
-            item.style.setProperty('--focus-blur', `${blur}px`);
+            // BUT: If the card is active (clicked), ignore these updates to prevent jank
+            if (!item.classList.contains('active-card')) {
+                item.style.setProperty('--focus-opacity', opacity);
+                item.style.setProperty('--focus-scale', scale);
+                item.style.setProperty('--focus-blur', `${blur}px`);
+            } else {
+                // Ensure variables are reset for active state (though CSS !important handles most)
+                item.style.setProperty('--focus-opacity', 1);
+                item.style.setProperty('--focus-scale', 1.05);
+                item.style.setProperty('--focus-blur', '0px');
+            }
         });
     });
 }
@@ -95,7 +105,8 @@ function initCVTilt() {
     cards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
             const item = card.closest('.cv-timeline-item');
-            if (!item.classList.contains('focused')) return; // Only tilt available on focused/readable items? Or all. Let's do all.
+            // Allow tilt on any item unless it is "locked" (active-card)
+            if (item.classList.contains('active-card')) return; 
 
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
@@ -111,7 +122,47 @@ function initCVTilt() {
         });
 
         card.addEventListener('mouseleave', () => {
+            const item = card.closest('.cv-timeline-item');
+            if (item.classList.contains('active-card')) return; // Don't reset if active
+
             card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
         });
+    });
+}
+
+function initCardClick() {
+    const items = document.querySelectorAll('.cv-timeline-item');
+    const body = document.body;
+
+    // Handle Card Clicks
+    items.forEach(item => {
+        const content = item.querySelector('.cv-timeline-content');
+        
+        content.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent document click from firing immediately
+            
+            const isActive = item.classList.contains('active-card');
+            
+            // Deactivate all first
+            items.forEach(i => i.classList.remove('active-card'));
+            body.classList.remove('has-active-card');
+            
+            // If it wasn't active before, make it active now
+            if (!isActive) {
+                item.classList.add('active-card');
+                body.classList.add('has-active-card');
+                
+                // Optional: Scroll to center
+                item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        });
+    });
+
+    // Handle Outside Clicks
+    document.addEventListener('click', (e) => {
+        if (body.classList.contains('has-active-card')) {
+            items.forEach(i => i.classList.remove('active-card'));
+            body.classList.remove('has-active-card');
+        }
     });
 }

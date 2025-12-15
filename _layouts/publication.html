@@ -1,111 +1,89 @@
----
-layout: default
----
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: " en-US" }}">
 
-<article class="pub-detail-page">
-    <div class="container">
-        <div class="pub-header animate-fade-in-up">
-            <a href="{{ '/publications/' | relative_url }}" class="back-link">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="19" y1="12" x2="5" y2="12"></line>
-                    <polyline points="12 19 5 12 12 5"></polyline>
-                </svg>
-                Back to Publications
-            </a>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% seo %}
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    <link rel="icon" type="image/png" href="{{ '/assets/images/favicon.png' | relative_url }}">
+    <script src="{{ '/assets/js/theme.js' | relative_url }}"></script>
+</head>
 
-            <div class="pub-meta-top">
-                <span class="pub-type badge">{{ page.type | capitalize }}</span>
-                <span class="pub-year">{{ page.year }}</span>
-            </div>
+<body>
+    {% include header.html %}
 
-            <h1 class="pub-title">{{ page.title }}</h1>
+    <main>
+        <article class="pub-detail">
+            <header class="detail-header-section">
+                <div class="container">
+                    <span class="detail-meta-tag">Research Paper</span>
+                    <h1 class="detail-title">{{ page.title }}</h1>
+                    <p class="detail-subtitle" style="font-style: italic;">{{ page.conference }} ({{ page.year }})</p>
 
-            <div class="pub-authors">
-                {% assign authors = page.authors | split: ", " %}
-                {% for author in authors %}
-                {% if author contains "Önbaş" %}
-                <span class="author me">{{ author }}</span>
-                {% else %}
-                <span class="author">{{ author }}</span>
-                {% endif %}
-                {% endfor %}
-            </div>
-
-            <div class="pub-venue">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-                </svg>
-                {{ page.conference }}
-            </div>
-        </div>
-
-        <!-- Visual Abstract / Content Grid -->
-        <div class="pub-grid animate-fade-in-up" style="animation-delay: 0.1s;">
-
-            <div class="pub-main glass-panel">
-                <h2>Abstract</h2>
-                <div class="abstract-text">
-                    {{ content }}
+                    <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center;">
+                        {% if page.download_link %}
+                        <a href="{{ page.download_link }}" class="button primary">
+                            Download PDF
+                        </a>
+                        {% endif %}
+                        {% if page.doi %}
+                        <a href="https://doi.org/{{ page.doi }}" target="_blank" class="button secondary">
+                            View DOI
+                        </a>
+                        {% endif %}
+                    </div>
                 </div>
+            </header>
 
-                <div class="pub-actions">
-                    {% if page.url %}
-                    <a href="{{ page.url }}" target="_blank" class="button primary">
-                        View Paper <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round">
-                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                            <polyline points="15 3 21 3 21 9"></polyline>
-                            <line x1="10" y1="14" x2="21" y2="3"></line>
-                        </svg>
-                    </a>
+            <div class="container detail-content-grid">
+                <aside class="detail-sidebar">
+                    <div class="detail-sticky-meta">
+                        <div class="meta-group">
+                            <label>Authors</label>
+                            <p>{{ page.authors }}</p>
+                        </div>
+
+                        {% if page.citation %}
+                        <div class="meta-group">
+                            <label>Citation</label>
+                            <p style="font-size: 0.85rem; font-family: 'Space Mono', monospace;">{{ page.citation }}</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                </aside>
+
+                <div class="detail-body">
+                    {% if page.abstract %}
+                    <div
+                        style="background: rgba(79, 70, 229, 0.05); padding: 1.5rem; border-left: 4px solid var(--primary-color); border-radius: 0 8px 8px 0; margin-bottom: 2rem;">
+                        <h3 style="margin-top: 0; font-size: 1.2rem;">Abstract</h3>
+                        <p style="margin-bottom: 0; font-size: 1rem;">{{ page.abstract }}</p>
+                    </div>
                     {% endif %}
 
-                    <button class="button secondary"
-                        onclick="navigator.clipboard.writeText('{{ page.bibtex }}'); alert('Citation copied!');">
-                        Copy Citation
-                    </button>
+                    {% if page.method %}
+                    <h2>Method</h2>
+                    <p>{{ page.method }}</p>
+                    {% endif %}
+
+                    {% if page.results %}
+                    <h2>Results</h2>
+                    <p>{{ page.results }}</p>
+                    {% endif %}
+
+                    {{ content }}
+
+                    <div class="interactive-figure">
+                        <img src="https://placehold.co/800x400/111/4F46E5?text=Data+Visualization" alt="Data Chart">
+                        <figcaption>Figure 1: Comparative analysis of the proposed method versus baseline.</figcaption>
+                    </div>
                 </div>
             </div>
+        </article>
+    </main>
 
-            <!-- Stats / Details Sidebar -->
-            <aside class="pub-sidebar">
-                <div class="stat-card glass-panel">
-                    <span class="stat-label">DOI</span>
-                    <a href="https://doi.org/{{ page.doi }}" class="stat-value link">{{ page.doi }}</a>
-                </div>
+    {% include footer.html %}
+</body>
 
-                <div class="stat-card glass-panel">
-                    <span class="stat-label">Pages</span>
-                    <span class="stat-value">{{ page.pages }}</span>
-                </div>
-
-                {% if page.impact %}
-                <div class="stat-card glass-panel highlight">
-                    <span class="stat-value big">{{ page.impact }}</span>
-                    <span class="stat-label">Impact Factor</span>
-                </div>
-                {% endif %}
-            </aside>
-
-        </div>
-    </div>
-</article>
-
-<style>
-    .pub-grid {
-        display: grid;
-        grid-template-columns: 2fr 1fr;
-        gap: 2rem;
-        margin-top: 3rem;
-    }
-
-    @media (max-width: 768px) {
-        .pub-grid {
-            grid-template-columns: 1fr;
-        }
-    }
-</style>
+</html>

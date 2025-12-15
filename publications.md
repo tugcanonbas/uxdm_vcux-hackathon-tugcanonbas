@@ -15,34 +15,31 @@ permalink: /publications/
   </div>
 
   <!-- Unique Stack Container -->
-  <div class="pub-stack-container">
-    {% for pub in site.data.publications %}
-      <div class="pub-card">
-        <div class="pub-year">{{ pub.year }}</div>
-        
-        <div class="pub-content">
-          <h3 class="pub-title">{{ pub.title }}</h3>
-          
-          <div class="pub-meta">
-            <span>{{ pub.authors }}</span>
-            <span class="separator"></span>
-            <span style="color: var(--text-color);">{{ pub.conference }}</span>
-            {% if pub.pages %}<span class="separator"></span> <span>pp. {{ pub.pages }}</span>{% endif %}
-          </div>
-          
-          <div class="pub-actions">
-            {% if pub.url %}
-            <a href="{{ pub.url }}" target="_blank" class="action-btn">
-              Read Paper <span style="margin-left: 5px;">↗</span>
-            </a>
-            {% endif %}
-            <button class="action-btn" style="border-style: dashed;">Cite</button>
-            <button class="action-btn" style="border-style: dotted;">Abstract</button>
-          </div>
-        </div>
-      </div>
-    {% endfor %}
-  </div>
+    <div class="pub-stack-container">
+      {% for pub in site.publications %}
+        <a href="{{ pub.url | relative_url }}" class="pub-card-wrapper" style="text-decoration: none;">
+            <div class="pub-card">
+              <div class="pub-spine"></div>
+              <div class="pub-content">
+                <div class="pub-year-bg">{{ pub.year }}</div>
+                
+                <span class="pub-type-badge">{{ pub.type | default: "Paper" }}</span>
+                
+                <h3 class="pub-title">{{ pub.title }}</h3>
+                <p class="pub-authors">{{ pub.authors }}</p>
+                <div class="pub-meta">
+                  <span class="pub-conf">{{ pub.conference }}</span>
+                  <span class="pub-year">{{ pub.year }}</span>
+                </div>
+                
+                <div class="pub-actions">
+                  <span class="action-btn">Open Detail</span>
+                </div>
+              </div>
+            </div>
+        </a>
+      {% endfor %}
+    </div>
 </div>
 
 <script src="{{ '/assets/js/publications.js' | relative_url }}"></script>
