@@ -21,5 +21,4 @@ This project represents a significant step forward in its domain.
 - **Feature 2**: Seamless user experience.
 - **Feature 3**: Scalable architecture.
 
-## Visuals
-![Project Visual](/assets/images/project-svgs/apprid.svg)
+

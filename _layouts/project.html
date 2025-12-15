@@ -71,8 +71,25 @@
                     {{ content }}
 
                     {% if page.outcomes %}
-                    <h2>Key Outcomes</h2>
-                    <p>{{ page.outcomes }}</p>
+                    <section id="outcomes" class="content-section reveal-on-scroll">
+                        <div class="section-marker">03</div>
+                        <h2>Key Outcomes</h2>
+                        <div class="glass-card highlight">
+                            <p>{{ page.outcomes }}</p>
+                        </div>
+                    </section>
+                    {% endif %}
+
+                    {% if page.teaser %}
+                    <section id="visuals" class="content-section reveal-on-scroll">
+                        <div class="section-marker">04</div>
+                        <h2>Visuals</h2>
+                        <div class="interactive-figure">
+                            <img src="{{ page.teaser | relative_url }}" alt="{{ page.title }} Visual"
+                                style="width: 100%; max-width: 600px; margin: 0 auto; display: block;">
+                            <figcaption>{{ page.title }} Interface Concept</figcaption>
+                        </div>
+                    </section>
                     {% endif %}
                 </div>
             </div>
